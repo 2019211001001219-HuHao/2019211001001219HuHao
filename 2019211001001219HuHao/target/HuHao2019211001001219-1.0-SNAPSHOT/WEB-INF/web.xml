@@ -16,6 +16,10 @@
         <servlet-name>LifeCydeServlet</servlet-name>
         <servlet-class>com.HuHao.week3.demo.LifeCydeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>JDBCDemoServlet</servlet-name>
+        <servlet-class>com.HuHao.week4.demo.JDBCDemoServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -29,5 +33,9 @@
     <servlet-mapping>
         <servlet-name>LifeCydeServlet</servlet-name>
         <url-pattern>/life</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JDBCDemoServlet</servlet-name>
+        <url-pattern>/jdbc</url-pattern>
     </servlet-mapping>
 </web-app>

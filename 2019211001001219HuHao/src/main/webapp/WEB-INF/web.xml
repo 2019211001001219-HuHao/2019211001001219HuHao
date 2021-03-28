@@ -11,10 +11,41 @@
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>com.HuHao.week3.demo.RegisterServlet</servlet-class>
+<!--String driver="com.microsoft.sqlserver.jdbc.SQLServerDriver";
+        String url="jdbc:sqlserver://localhost:databaseName:userdb";
+        String username="sa";
+        String password="123456789";
+        -->
+        <init-param>
+            <param-name>driver</param-name>
+            <param-value>com.microsoft.sqlserver.jdbc.SQLServerDriver</param-value>
+        </init-param>
+        <init-param>
+            <param-name>url</param-name>
+            <param-value>jdbc:sqlserver://localhost:databaseName:userdb</param-value>
+        </init-param>
+        <init-param>
+            <param-name>username</param-name>
+            <param-value>sa</param-value>
+        </init-param>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>123456789</param-value>
+        </init-param>
+
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
         <servlet-name>LifeCydeServlet</servlet-name>
         <servlet-class>com.HuHao.week3.demo.LifeCydeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>JDBCDemoServlet</servlet-name>
+        <servlet-class>com.HuHao.week4.demo.JDBCDemoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfigDemoServlet</servlet-name>
+        <servlet-class>com.HuHao.week4.demo.ConfigDemoServlet</servlet-class>
     </servlet>
 
 
@@ -29,5 +60,13 @@
     <servlet-mapping>
         <servlet-name>LifeCydeServlet</servlet-name>
         <url-pattern>/life</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JDBCDemoServlet</servlet-name>
+        <url-pattern>/jdbc</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfigDemoServlet</servlet-name>
+        <url-pattern>/Config</url-pattern>
     </servlet-mapping>
 </web-app>
