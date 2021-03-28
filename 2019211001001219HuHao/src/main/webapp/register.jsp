@@ -13,14 +13,13 @@
 <body>
     <h1><%= "New User Registration" %>
     </h1>
-    <form method="post">
-        Username:<input type="text" name="Username"><br/>
+    <form method="post" action="/register">
+        Username:<input type="text" name="username"><br/>
         Password:<input type="text" name="password"><br/>
-        Email:<input type="text" name="Email"><br/>
-        Gender:<input type="radio" name="sex">男
-        <input type="radio" name="sex">女<br/>
-        Date of birth:<input type="date" name="Date of birth">
+        Email:<input type="text" name="email"><br/>
+        Gender:<input type="radio" name="gender" value="male">Male<input type="radio" name="gender" value="female">Female<br/>
+        Date of birth:<input type="text name" name="birthDate">
+        <input type="submit" value="Register"/>
     </form>
-        <pre><input type="submit" value="Register"/></pre>
 </body>
 </html>
