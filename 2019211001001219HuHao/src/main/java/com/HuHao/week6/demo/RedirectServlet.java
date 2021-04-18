@@ -22,12 +22,12 @@ public class RedirectServlet extends HttpServlet {
 
         System.out.println("after redirect");
         //2.start with /
-        response.sendRedirect("/2019211001001219HuHao_war_exploded/index.jsp");//-???-HTTP Status 404-Not Found
+        response.sendRedirect("/2019211001001218LiuHeng_war_exploded/index.jsp");//-???-HTTP Status 404-Not Found
         //why?-look at url
         ///http://localhost:8080/2019211001001219HuHao_war_exploded/redirect
         //http://localhost:8080/index.jsp
         //url change after 8080-means tomcat
-        //add /2019211001001219HuHao_war_exploded/
+        //add /2019211001001218LiuHeng_war_exploded/
 
         //redirect-another server- Absolute URL-full url
         response.sendRedirect("https://www.baidu.com/");
