@@ -1,24 +1,36 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: TS
-  Date: 2021/4/11
-  Time: 21:15
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@include file="header.jsp"%>
-<h1>login</h1>
+<%@include file="header.jsp" %>
+Login <br>
 <%
-    if(!(request.getAttribute("message")==null){
-
-        //error
-    out.println(request.getAttribute("message"));
+    if(request.getAttribute("msg") != null)
+    {
+        out.println("<h3 style = 'color:red'>"+request.getAttribute("msg")+"</h3>");
     }
 %>
-<form method="post" action="login">
-    Username:<input type="text" name="username"><br/>
-    Password:<input type="password" name="password"><br/>
-    <input type="submit" value="Submit"/>
+<%
+    Cookie[]allCookies=request.getCookies();
+    String username="",password="",rememberMeVal="";
+    if (allCookies!=null){
+        for (Cookie c:allCookies){
+            if (c.getName().equals("cUsername")){
+                username=c.getValue();
+            }
+            if (c.getName().equals("cPassword")){
+                password =c.getValue();
+            }
+            if (c.getName().equals("cRememberMe")){
+                rememberMeVal=c.getValue();
+            }
+        }
+    }
+%>
+<form method="post" action="${pageContext.request.contextPath}/login">
+    <p>Username:<input type="text" name="name" value="<%=username%>"/></p>
+
+    <p>Password:<input type="password" name="password"  value="<%=password%>"/></p>
+    <input type="checkbox" name="rememberMe" value="1" <%=rememberMeVal.equals("1")?"checked":""%>/> Remember Me
+    </br>
+    <input type="submit" value="Login"/>
 </form>
-<%@include file="footer.jsp"%>
+<%@include file="footer.jsp" %>

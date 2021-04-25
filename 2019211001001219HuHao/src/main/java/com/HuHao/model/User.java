@@ -15,13 +15,13 @@ public class User {
     }
     //full
 
-    public User(int id,String username,String password,String email,String gender,java.util.Date birthDate) {
+    public User(int id, String username, String password, String email, String gender, java.util.Date birthDate) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.gender = gender;
-        this. birthDate= birthDate;
+        this.birthDate = birthDate;
     }
 
     public int getId() {
@@ -84,3 +84,4 @@ public class User {
                 '}';
     }
 }
+

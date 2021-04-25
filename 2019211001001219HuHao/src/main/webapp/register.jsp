@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 语笙
-  Date: 2021/3/15
-  Time: 23:01
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@include file="header.jsp"%>
@@ -13,7 +6,15 @@
         Password:<input type="text" name="password"><br/>
         Email:<input type="text" name="email"><br/>
         Gender:<input type="radio" name="gender" value="male">Male<input type="radio" name="gender" value="female">Female<br/>
-        Date of birth:<input type="text name" name="birthDate">
-        <input type="submit" value="Register"/>
+        <label for="1">
+            <input type="radio" name="gender" value="male" id="1"/> <span style="color: #D2B48C">Male</span>
+        </label>
+
+        <label for="2">
+            <input type="radio" name="gender" value="female" id="2"/> <span style="color: #D2B48C">Female</span>
+        </label>
+        <br/><br/>
+        <span style="color: #FFA500">Date of birth(yyyy-mm-dd)</span><input type="date"name="date"  pattern="yyyy-mm-dd" required="true"style="background-color: #EAEAAE"><br/><br/>
+        <input type="submit" value="register"style="background-color: #EAEAAE">
     </form>
 <%@include file="footer.jsp"%>

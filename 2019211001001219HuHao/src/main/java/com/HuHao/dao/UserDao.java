@@ -1,98 +1,143 @@
 package com.HuHao.dao;
 
 import com.HuHao.model.User;
-import javax.xml.transform.Result;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+public class UserDao  implements  IUserDao{
 
-public class UserDao implements IUserDao{
+    QueryRunner qr = new QueryRunner();
+
     @Override
     public boolean saveUser(Connection con, User user) throws SQLException {
-        //insert...into usertable---write code yourself
-        return false;
+        String sql = "insert into usertable(username,password,email,gender,birth) values(?,?,?,?,?)";
+        int i = qr.update(con,sql,new Object[]{user.getUsername(),user.getPassword(),user.getEmail(),user.getGender(),user.getBirthdate()});
+        if (i != 0) {
+            return true;
+        }else return false;
     }
 
     @Override
     public int deleteUser(Connection con, User user) throws SQLException {
-        //delete......where id=?
-        return 0;
+        String sql = "delete from usertable where id = ?";
+        return  qr.update(con,sql,new BeanListHandler<>(User.class));
     }
 
     @Override
     public int updateUser(Connection con, User user) throws SQLException {
-        //update......where id=?
-        return 0;
+        String sql = "update usertable set name = ?,password = ?, email = ?, gender = ?, birthdate = ? where id = ?;";
+        PreparedStatement st= con.prepareStatement(sql);
+        st.setString(1,user.getUsername());
+        st.setString(2,user.getPassword());
+        st.setString(3,user.getEmail());
+        st.setString(4,user.getGender());
+        st.setString(5, String.valueOf(user.getBirthdate()));
+        st.setInt(6,user.getID());
+
+        int i = st.executeUpdate();
+        if(i != 0){
+            return  1;
+        }else {
+            return  0;
+        }
+//        String sql = "update usertable set name = ?,password = ?, email = ?, gender = ?, birthdate = ? where id = ?";
+//        return qr.update(con,sql,new Object[]{user.getUsername(),user.getPassword(),user.getEmail(),user.getGender(),user.getBirthdate(),user.getID()});
     }
+
 
     @Override
     public User findById(Connection con, Integer id) throws SQLException {
-        //select---where id=?---write jdbc code yourself
-        return null;
-    }
+        String sql = "SELECT * FROM usertable WHERE id = ?;";
+        PreparedStatement st= con.prepareStatement(sql);
+        st.setInt(1,id);
 
-    @Override
-    public static User findByUsernamePassword(Connection con, String username, String password) throws SQLException {
-        //use for login
-        //select---where username=?and password=?---i will show you now
-        String sql="select id,username,password,email,gender,birthdate from usertable where username=?and password=?";
-        PreparedStatement st=con.prepareStatement(sql);
-        st.setString(1,username);
-        st.setString(2,password);
         ResultSet rs=st.executeQuery();
         User user=null;
         if(rs.next()){
-            //get from rs and set into user model
             user=new User();
-            user.setId(rs.getInt("id"));
-            user.setUsername(rs.getString("username"));
+            user.setID(rs.getInt("id"));
+            user.setUsername(rs.getString("name"));
+            user.setBirthdate(rs.getDate("birthdate"));
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
             user.setGender(rs.getString("gender"));
-            user.setBirthDate(rs.getDate("birthdate"));
-
-            //done
+            return user;
+        }else {
+            return  null;
         }
+//        String sql = "select * from usertable where id =  " + id;
+//        return  qr.query(con,sql,new BeanHandler<>(User.class));
+    }
 
-        return user;
+    @Override
+    public User findByUsernamePassword(Connection con, String username, String password) throws SQLException {
+        String sql = "SELECT * FROM usertable WHERE name=? AND password=?;";
+        PreparedStatement st= con.prepareStatement(sql);
+        st.setString(1,username);
+        st.setString(2,password);
+
+        ResultSet rs=st.executeQuery();
+        User user=null;
+        if(rs.next()){
+            user=new User();
+            user.setID(rs.getInt("id"));
+            user.setUsername(rs.getString("name"));
+            user.setBirthdate(rs.getDate("birthdate"));
+            user.setPassword(rs.getString("password"));
+            user.setEmail(rs.getString("email"));
+            user.setGender(rs.getString("gender"));
+            return user;
+        }else {
+            return  null;
+        }
+        //System.out.println(con);
+        //String sql2 = "select * from usertable where name = '" + username + "' and password = '" + password + "'";
+        // User user = qr.query(con, sql2, new BeanHandler<>(User.class));
+        // System.out.println(user.toString());
+        // return user;
+
     }
 
     @Override
     public List<User> findByUsername(Connection con, String username) throws SQLException {
-        //select---where username=?---write jdbc code yourself
-        return null;
+        String sql = "select * from usertable where name = " + username;
+        return  qr.query(sql,new BeanListHandler<>(User.class));
     }
 
     @Override
     public List<User> findByPassword(Connection con, String password) throws SQLException {
-        //select---where password=?---write jdbc code yourself
-        return null;
+        String sql = "select * from usertable where password = " + password;
+        return  qr.query(con,sql,new BeanListHandler<>(User.class));
     }
 
     @Override
     public List<User> findByEmail(Connection con, String email) throws SQLException {
-        //select---where email=?---write jdbc code yourself
-        return null;
+        String sql = "select * from usertable where email = " + email;
+        return  qr.query(con,sql,new BeanListHandler<>(User.class));
     }
 
     @Override
     public List<User> findByGender(Connection con, String gender) throws SQLException {
-        //select---where gender=?---write jdbc code yourself
-        return null;
+        String sql = "select * from usertable where gender = " + gender;
+        return  qr.query(con,sql,new BeanListHandler<>(User.class));
     }
 
     @Override
     public List<User> findByBirthdate(Connection con, Date birthDate) throws SQLException {
-        //select---where birthdate=?---write jdbc code yourself
-        return null;
+        String sql = "select * from usertable where birthdate = " + birthDate;
+        return  qr.query(con,sql,new BeanListHandler<>(User.class));
     }
 
     @Override
     public List<User> findAllUser(Connection con) throws SQLException {
-        //select * from usertable--- ---write jdbc code yourself
-        return null;
+        String sql = "SELECT * FROM usertable";
+        return qr.query(con,sql,new BeanListHandler<>(User.class));
     }
 }
