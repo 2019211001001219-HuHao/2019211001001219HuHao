@@ -3,10 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-
+    <listener>
+        <listener-class>com.HuHao.week6.demo.JDBCServletContextListener</listener-class>
+    </listener>
     <servlet>
         <servlet-name>HuHao</servlet-name>
         <servlet-class>com.HuHao.week2.name</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LifeCydeServlet</servlet-name>
+        <servlet-class>com.HuHao.week3.demo.LifeCydeServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
@@ -35,10 +41,7 @@
 
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <servlet>
-        <servlet-name>LifeCydeServlet</servlet-name>
-        <servlet-class>com.HuHao.week3.demo.LifeCydeServlet</servlet-class>
-    </servlet>
+
     <servlet>
         <servlet-name>JDBCDemoServlet</servlet-name>
         <servlet-class>com.HuHao.week4.demo.JDBCDemoServlet</servlet-class>
@@ -48,7 +51,18 @@
         <servlet-class>com.HuHao.week4.demo.ConfigDemoServlet</servlet-class>
     </servlet>
 
-
+    <servlet-mapping>
+        <servlet-name>ConfigDemoServlet</servlet-name>
+        <url-pattern>/config</url-pattern>
+    </servlet-mapping>
+    <context-param>
+        <param-name>name</param-name>
+        <param-value>HuHao</param-value>
+    </context-param>
+    <context-param>
+        <param-name>student-id</param-name>
+        <param-value>2019211001001219</param-value>
+    </context-param>
     <servlet-mapping>
     <servlet-name>HuHao</servlet-name>
     <url-pattern>/hello</url-pattern>
