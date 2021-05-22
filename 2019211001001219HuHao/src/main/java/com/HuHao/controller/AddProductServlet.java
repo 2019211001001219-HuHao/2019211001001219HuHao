@@ -56,10 +56,8 @@ public class AddProductServlet extends HttpServlet {
         }catch (SQLException e){
             e.printStackTrace();
         }
-
         if (i>0){
             request.getRequestDispatcher("/WEB-INF/views/admin/productList.jsp").forward(request,response);
         }
     }
-
 }
