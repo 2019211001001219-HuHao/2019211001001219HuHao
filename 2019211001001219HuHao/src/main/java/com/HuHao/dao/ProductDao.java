@@ -60,7 +60,7 @@ public class ProductDao implements  IProductDao{
     @Override
     public int delete(Integer productId, Connection con)throws SQLException {
         int n = 0;
-        String sql = "delete from Product where ProductId=?";
+        String sql = "delete from Product where Productld=?";
         PreparedStatement pt = con.prepareStatement(sql);
         pt.setInt(1, productId);
         n = pt.executeUpdate();
@@ -90,8 +90,10 @@ public class ProductDao implements  IProductDao{
         return 0;
     }
 
+
     @Override
     public Product findById(Integer productId, Connection con)throws SQLException{
+        System.out.println(con);
         String queryString = "select * from Product where Productld= ?";
         PreparedStatement pt = con.prepareStatement(queryString);
         pt.setInt(1, productId);
@@ -148,6 +150,7 @@ public class ProductDao implements  IProductDao{
                 product.setProductId(rs.getInt("Productld"));
                 product.setProductName(rs.getString("ProductName"));
                 list.add(product);
+
             } System.out.println("successful");
         } catch (SQLException e) {
             e.printStackTrace();
