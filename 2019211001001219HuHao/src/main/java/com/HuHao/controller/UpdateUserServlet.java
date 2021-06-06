@@ -18,6 +18,7 @@ public class UpdateUserServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         con =(Connection)getServletContext().getAttribute("dbConn");
+
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,7 +32,6 @@ public class UpdateUserServlet extends HttpServlet {
             throwables.printStackTrace();
         }
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name,password,email,gender;
@@ -42,18 +42,17 @@ public class UpdateUserServlet extends HttpServlet {
         gender = request.getParameter("gender");
         Date date = Date.valueOf(request.getParameter("birth"));
         User user = new User(id, name, password, email, gender, date);
-
         IUserDao iUserDao = new UserDao();
         try {
             int i = iUserDao.updateUser(con, user);
             if (i != 0){
                 request.getSession().setAttribute("user",iUserDao.findById(con,id));
-                request.getRequestDispatcher("WEB-INF/views/userinfo.jsp").forward(request, response);
+//                request.getRequestDispatcher("WEB-INF/views/userinfo.jsp").forward(request, response);
+                request.getRequestDispatcher("accountDetails").forward(request, response);
             }else {
                 request.setAttribute("message","update Error!!!");
-                request.getRequestDispatcher("WEB-INF/views/updateUser.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/views/userinfo.jsp").forward(request, response);
             }
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

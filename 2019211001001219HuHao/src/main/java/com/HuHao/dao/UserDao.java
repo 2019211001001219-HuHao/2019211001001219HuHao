@@ -75,14 +75,11 @@ public class UserDao  implements  IUserDao{
 //        String sql = "select * from usertable where id =  " + id;
 //        return  qr.query(con,sql,new BeanHandler<>(User.class));
     }
-
-    @Override
     public User findByUsernamePassword(Connection con, String username, String password) throws SQLException {
         String sql = "SELECT * FROM usertable WHERE name=? AND password=?;";
         PreparedStatement st= con.prepareStatement(sql);
         st.setString(1,username);
         st.setString(2,password);
-
         ResultSet rs=st.executeQuery();
         User user=null;
         if(rs.next()){
@@ -102,9 +99,7 @@ public class UserDao  implements  IUserDao{
         // User user = qr.query(con, sql2, new BeanHandler<>(User.class));
         // System.out.println(user.toString());
         // return user;
-
     }
-
     @Override
     public List<User> findByUsername(Connection con, String username) throws SQLException {
         String sql = "select * from usertable where name = " + username;

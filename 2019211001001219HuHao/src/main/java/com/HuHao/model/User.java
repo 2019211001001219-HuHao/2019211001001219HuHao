@@ -1,87 +1,62 @@
 package com.HuHao.model;
-
 import java.util.Date;
-
 public class User {
     private int id;
-    private String username;
+    private String name;
     private String password;
     private String email;
     private String gender;
-    private java.util.Date birthDate;
-    //constructor
-
-    public User() {
+    private Date birthdate;
+    public User(){
     }
-    //full
-
-    public User(int id, String username, String password, String email, String gender, java.util.Date birthDate) {
+    public User(int id, String name, String password, String email, String gender, Date birthdate) {
+        super();
         this.id = id;
-        this.username = username;
+        this.name = name;
         this.password = password;
         this.email = email;
         this.gender = gender;
-        this.birthDate = birthDate;
+        this.birthdate = birthdate;
     }
-
-    public int getId() {
+    public int getID() {
         return id;
     }
-
-    public void setId(int id) {
+    public void setID(int id) {
         this.id = id;
     }
-
     public String getUsername() {
-        return username;
+        return name;
     }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String name) {
+        this.name = name;
     }
-
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
-
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
     public String getGender() {
         return gender;
     }
-
     public void setGender(String gender) {
         this.gender = gender;
     }
-
-    public Date getBirthDate() {
-        return birthDate;
+    public Date getBirthdate() {
+        return birthdate;
     }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
-
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", gender='" + gender + '\'' +
-                ", birthDate=" + birthDate +
-                '}';
+        return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", gender="
+                + gender + ", birthdate=" + birthdate + "]";
     }
 }
-
